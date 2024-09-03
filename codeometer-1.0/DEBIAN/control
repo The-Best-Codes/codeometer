@@ -6,6 +6,7 @@ Architecture: all
 Depends: bash
 Maintainer: Best Codes <bestcodes.official@gmail.com>
 Homepage: https://github.com/the-best-codes/codeometer
+License: MIT
 Description: A simple script to count lines of code in shell scripts.
  This tool provides a quick way to count lines of code in shell scripts.
  It can be used to measure project size or track development progress.
@@ -13,3 +14,13 @@ Description: A simple script to count lines of code in shell scripts.
   * Counts lines in individual files or entire directories
   * Excludes comment lines and blank lines from the count
   * Provides a summary report of total lines counted
+Essential: no
+Origin: Best Codes
+Bugs: https://github.com/the-best-codes/codeometer/issues
+Recommends: git
+Vcs-Git: https://github.com/the-best-codes/codeometer.git
+Vcs-Browser: https://github.com/the-best-codes/codeometer
+Changelog: https://github.com/the-best-codes/codeometer/releases
+Release: 1
+Distribution: stable
+Urgency: low
