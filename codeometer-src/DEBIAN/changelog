@@ -1,0 +1,5 @@
+codeometer (1.1) stable; urgency=low
+
+  * Added command line flags controlling color and formatting
+
+ -- Best Codes <bestcodes.official@gmail.com>  Tue, 03 Sep 2024 16:32:37 -0500

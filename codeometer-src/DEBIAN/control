@@ -1,5 +1,5 @@
 Package: codeometer
-Version: 1.0
+Version: 1.1
 Section: base
 Priority: optional
 Architecture: all
@@ -24,3 +24,4 @@ Changelog: https://github.com/the-best-codes/codeometer/releases
 Release: 1
 Distribution: stable
 Urgency: low
+Date: Tue, 03 Sep 2024 16:32:37 -0500
