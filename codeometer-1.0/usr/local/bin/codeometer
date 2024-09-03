@@ -1,0 +1,158 @@
+#!/bin/bash
+
+# Check if a directory path is provided
+if [ $# -eq 0 ]; then
+    echo "Please provide the path to your code project."
+    echo "Usage: $0 /path/to/your/project"
+    exit 1
+fi
+
+# Set the project directory
+PROJECT_DIR="$1"
+
+# Check if the directory exists
+if [ ! -d "$PROJECT_DIR" ]; then
+    echo "Error: Directory does not exist."
+    exit 1
+fi
+
+# Function to count lines and files
+count_lines_and_files() {
+    find "$1" -type f \( -name "*.$2" \) -print0 | xargs -0 wc -l 2>/dev/null | awk '
+        NF==2 {files++; lines+=$1}
+        END {print lines, files}'
+}
+
+# Function to detect project type
+detect_project_type() {
+    if [ -f "$PROJECT_DIR/package.json" ]; then
+        echo "Node.js"
+    elif [ -f "$PROJECT_DIR/requirements.txt" ] || [ -f "$PROJECT_DIR/setup.py" ]; then
+        echo "Python"
+    elif [ -f "$PROJECT_DIR/pom.xml" ] || [ -f "$PROJECT_DIR/build.gradle" ]; then
+        echo "Java"
+    elif [ -f "$PROJECT_DIR/Cargo.toml" ]; then
+        echo "Rust"
+    elif [ -f "$PROJECT_DIR/go.mod" ]; then
+        echo "Go"
+    elif [ -f "$PROJECT_DIR/Gemfile" ]; then
+        echo "Ruby"
+    elif [ -f "$PROJECT_DIR/composer.json" ]; then
+        echo "PHP"
+    elif [ -f "$PROJECT_DIR/CMakeLists.txt" ]; then
+        echo "C/C++"
+    elif [ -d "$PROJECT_DIR/.git" ]; then
+        echo "Git (Unable to determine specific language)"
+    else
+        echo "Unknown"
+    fi
+}
+
+# Detect project type
+PROJECT_TYPE=$(detect_project_type)
+
+# Set auto-generated directories and file types based on project type
+case $PROJECT_TYPE in
+    "Node.js")
+        AUTO_GEN_DIRS="node_modules"
+        FILE_TYPES="js jsx ts tsx json"
+        ;;
+    "Python")
+        AUTO_GEN_DIRS="venv env .venv"
+        FILE_TYPES="py pyw pyx pxd pxi"
+        ;;
+    "Java")
+        AUTO_GEN_DIRS="target build"
+        FILE_TYPES="java class jar"
+        ;;
+    "Rust")
+        AUTO_GEN_DIRS="target"
+        FILE_TYPES="rs toml"
+        ;;
+    "Go")
+        AUTO_GEN_DIRS="vendor"
+        FILE_TYPES="go"
+        ;;
+    "Ruby")
+        AUTO_GEN_DIRS="vendor"
+        FILE_TYPES="rb rake"
+        ;;
+    "PHP")
+        AUTO_GEN_DIRS="vendor"
+        FILE_TYPES="php phtml php3 php4 php5 php7 phps"
+        ;;
+    "C/C++")
+        AUTO_GEN_DIRS="build"
+        FILE_TYPES="c cpp cxx cc h hpp hxx hh"
+        ;;
+    *)
+        AUTO_GEN_DIRS=""
+        FILE_TYPES="py js jsx ts tsx html css java cpp c h rb php go rs"
+        echo "Warning: Unable to determine specific project type. Counting all common file types."
+        ;;
+esac
+
+# Initialize variables
+TOTAL_LINES=0
+TOTAL_FILES=0
+AUTO_GENERATED_LINES=0
+AUTO_GENERATED_FILES=0
+
+# Count total lines and files
+for ext in $FILE_TYPES; do
+    read -r lines files <<< $(count_lines_and_files "$PROJECT_DIR" "$ext")
+    TOTAL_LINES=$((TOTAL_LINES + lines))
+    TOTAL_FILES=$((TOTAL_FILES + files))
+done
+
+# Count auto-generated lines and files
+for dir in $AUTO_GEN_DIRS; do
+    if [ -d "$PROJECT_DIR/$dir" ]; then
+        for ext in $FILE_TYPES; do
+            read -r lines files <<< $(count_lines_and_files "$PROJECT_DIR/$dir" "$ext")
+            AUTO_GENERATED_LINES=$((AUTO_GENERATED_LINES + lines))
+            AUTO_GENERATED_FILES=$((AUTO_GENERATED_FILES + files))
+        done
+    fi
+done
+
+# Calculate hand-written lines and files
+HAND_WRITTEN_LINES=$((TOTAL_LINES - AUTO_GENERATED_LINES))
+HAND_WRITTEN_FILES=$((TOTAL_FILES - AUTO_GENERATED_FILES))
+
+# Function to print formatted output
+print_stat() {
+    printf "%-20s %8d %8d\n" "$1" "$2" "$3"
+}
+
+# Print statistics
+echo "Project Type: $PROJECT_TYPE"
+echo ""
+echo "Code Statistics:"
+echo "--------------------------------"
+printf "%-20s %8s %8s\n" "Category" "Lines" "Files"
+echo "--------------------------------"
+print_stat "Total:" "$TOTAL_LINES" "$TOTAL_FILES"
+print_stat "Hand-written:" "$HAND_WRITTEN_LINES" "$HAND_WRITTEN_FILES"
+print_stat "Auto-generated:" "$AUTO_GENERATED_LINES" "$AUTO_GENERATED_FILES"
+echo "--------------------------------"
+
+# Calculate and print percentages
+if [ $TOTAL_LINES -ne 0 ]; then
+    HAND_PERCENT=$(awk "BEGIN {printf \"%.2f\", ($HAND_WRITTEN_LINES / $TOTAL_LINES) * 100}")
+    AUTO_PERCENT=$(awk "BEGIN {printf \"%.2f\", ($AUTO_GENERATED_LINES / $TOTAL_LINES) * 100}")
+    echo ""
+    echo "Percentages:"
+    echo "  Hand-written: $HAND_PERCENT%"
+    echo "  Auto-generated: $AUTO_PERCENT%"
+fi
+
+# Print lines by file extension
+echo ""
+echo "Lines of code by file extension:"
+for ext in $FILE_TYPES; do
+    read -r lines files <<< $(count_lines_and_files "$PROJECT_DIR" "$ext")
+    if [ "$lines" != "0" ]; then
+        printf "  %-5s: %8d lines in %d files\n" ".$ext" "$lines" "$files"
+    fi
+done

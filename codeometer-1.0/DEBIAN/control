@@ -1,0 +1,15 @@
+Package: codeometer
+Version: 1.0
+Section: base
+Priority: optional
+Architecture: all
+Depends: bash
+Maintainer: Best Codes <bestcodes.official@gmail.com>
+Homepage: https://github.com/the-best-codes/codeometer
+Description: A simple script to count lines of code in shell scripts.
+ This tool provides a quick way to count lines of code in shell scripts.
+ It can be used to measure project size or track development progress.
+ Features:
+  * Counts lines in individual files or entire directories
+  * Excludes comment lines and blank lines from the count
+  * Provides a summary report of total lines counted
