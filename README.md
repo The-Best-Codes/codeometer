@@ -22,7 +22,7 @@ Codeometer provides detailed code analysis for your projects, helping you unders
 Codeometer is packaged for Debian-based systems. To install, use:
 
 ```bash
-sudo dpkg -i codeometer_1.2.0_all.deb
+sudo dpkg -i codeometer_1.2.0.deb
 ```
 
 ## Dependencies
@@ -79,8 +79,8 @@ Codeometer is licensed under the MIT License.
 
 ## Contact
 
-Maintainer: Best Codes <bestcodes.official@gmail.com>
+Maintainer: [BestCodes](https://bestcodes.dev)
 
 ## Links
 
-- [GitHub Repository](https://github.com/the-best-codes/codeometer)
+- [GitHub Repository](https://github.com/The-Best-Codes/codeometer)
