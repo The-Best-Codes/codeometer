@@ -1,6 +1,6 @@
 # Codeometer
 
-Codeometer is a powerful command-line tool for analyzing code statistics across your projects.
+Codeometer is a powerful CLI tool for analyzing code statistics across your projects.
 
 ## Description
 
