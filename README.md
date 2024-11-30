@@ -19,7 +19,9 @@ Codeometer provides detailed code analysis for your projects, helping you unders
 
 ## Installation
 
-Codeometer is packaged for Debian-based systems. To install, use:
+Codeometer is packaged for Debian-based systems. To install, download the DEB file and open it in an app installer.
+
+If you don't have an app installer, download the file and run this command:
 
 ```bash
 sudo dpkg -i codeometer_1.2.0.deb
