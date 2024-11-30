@@ -1,23 +1,26 @@
 Package: codeometer
-Version: 1.1
+Version: 1.2.0
 Section: base
 Priority: optional
 Architecture: all
-Depends: bash
+Depends: bash (>= 4.0), findutils, coreutils, gawk
 Maintainer: Best Codes <bestcodes.official@gmail.com>
 Homepage: https://github.com/the-best-codes/codeometer
 License: MIT
-Description: A simple script to count lines of code in shell scripts.
- This tool provides a quick way to count lines of code in shell scripts.
- It can be used to measure project size or track development progress.
- Features:
-  * Counts lines in individual files or entire directories
-  * Excludes comment lines and blank lines from the count
-  * Provides a summary report of total lines counted
+Description: A powerful command-line tool for analyzing code statistics across projects.
+ This tool provides detailed code analysis for your projects, helping you understand
+ your codebase size, composition, and structure. Features include:
+  * Automatic project type detection (Node.js, Python, Java, Rust, Go, Ruby, PHP, C/C++)
+  * Counts lines of code across multiple file types
+  * Distinguishes between hand-written and auto-generated code
+  * Optional comment line counting
+  * Support for hidden files and directories
+  * Colored and formatted output
+  * Progress bar for large projects
 Essential: no
 Origin: Best Codes
 Bugs: https://github.com/the-best-codes/codeometer/issues
-Recommends: git
+Recommends: git, ncurses-bin
 Vcs-Git: https://github.com/the-best-codes/codeometer.git
 Vcs-Browser: https://github.com/the-best-codes/codeometer
 Changelog: https://github.com/the-best-codes/codeometer/releases

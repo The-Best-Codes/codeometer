@@ -1,33 +1,72 @@
 # Codeometer
 
-Codeometer is a simple script to count lines of code in shell scripts.
+Codeometer is a powerful command-line tool for analyzing code statistics across your projects.
 
 ## Description
 
-Codeometer provides a quick way to count lines of code in shell scripts. It can be used to measure project size or track development progress.
+Codeometer provides detailed code analysis for your projects, helping you understand your codebase size, composition, and structure. It automatically detects project types and provides relevant statistics while excluding auto-generated code.
 
 ### Features
 
-- Counts lines in individual files or entire directories
-- Excludes comment lines and blank lines from the count
-- Provides a summary report of total lines counted
+- Automatic project type detection (Node.js, Python, Java, Rust, Go, Ruby, PHP, C/C++)
+- Counts lines of code across multiple file types
+- Distinguishes between hand-written and auto-generated code
+- Optional comment line counting
+- Support for hidden files and directories
+- Colored and formatted output
+- Progress bar for large projects
+- Detailed statistics and percentages
 
 ## Installation
 
 Codeometer is packaged for Debian-based systems. To install, use:
 
 ```bash
-sudo dpkg -i codeometer_1.0_all.deb
+sudo dpkg -i codeometer_1.2.0_all.deb
 ```
 
 ## Dependencies
 
-- bash
+- bash (version 4.0 or later)
+- find
+- wc
+- awk
+- tput (for terminal formatting)
 
 ## Usage
 
+Basic usage:
+
 ```bash
 codeometer /path/to/project
+```
+
+Available options:
+
+```bash
+codeometer [OPTIONS] /path/to/project
+
+Options:
+  --no-color       Disable colored output
+  --no-format      Disable formatted output
+  --hidden         Include hidden files and directories
+  --comments       Count and display comment statistics
+  --version        Display version information
+  --help          Display this help message
+```
+
+## Examples
+
+Count lines in a Python project:
+
+```bash
+codeometer /path/to/python/project
+```
+
+Include hidden files and count comments:
+
+```bash
+codeometer --hidden --comments /path/to/project
 ```
 
 ## Contributing

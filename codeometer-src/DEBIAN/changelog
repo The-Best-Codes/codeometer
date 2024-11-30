@@ -1,5 +1,13 @@
-codeometer (1.1) stable; urgency=low
+codeometer (1.2.0) stable; urgency=low
 
-  * Added command line flags controlling color and formatting
+  * Major code restructuring and new features
+  * Split code into modular components
+  * Added comment line counting (--comments)
+  * Added hidden file support (--hidden)
+  * Added help and version commands
+  * Improved project type detection
+  * Enhanced statistics and reporting
+  * Added progress bar for large projects
+  * Fixed various bugs and improved error handling
 
  -- Best Codes <bestcodes.official@gmail.com>  Tue, 03 Sep 2024 16:32:37 -0500
