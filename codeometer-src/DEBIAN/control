@@ -5,7 +5,7 @@ Priority: optional
 Architecture: all
 Depends: bash (>= 4.0), findutils, coreutils, gawk
 Maintainer: Best Codes <bestcodes.official@gmail.com>
-Homepage: https://github.com/the-best-codes/codeometer
+Homepage: https://github.com/The-Best-Codes/codeometer
 License: MIT
 Description: A powerful command-line tool for analyzing code statistics across projects.
  This tool provides detailed code analysis for your projects, helping you understand
@@ -19,11 +19,11 @@ Description: A powerful command-line tool for analyzing code statistics across p
   * Progress bar for large projects
 Essential: no
 Origin: Best Codes
-Bugs: https://github.com/the-best-codes/codeometer/issues
+Bugs: https://github.com/The-Best-Codes/codeometer/issues
 Recommends: git, ncurses-bin
-Vcs-Git: https://github.com/the-best-codes/codeometer.git
-Vcs-Browser: https://github.com/the-best-codes/codeometer
-Changelog: https://github.com/the-best-codes/codeometer/releases
+Vcs-Git: https://github.com/The-Best-Codes/codeometer.git
+Vcs-Browser: https://github.com/The-Best-Codes/codeometer
+Changelog: https://github.com/The-Best-Codes/codeometer/releases
 Release: 1
 Distribution: stable
 Urgency: low
